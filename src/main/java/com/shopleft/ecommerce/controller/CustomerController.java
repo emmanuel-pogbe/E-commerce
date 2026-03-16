@@ -29,8 +29,8 @@ public class CustomerController {
     }
 
     @DeleteMapping(path = "/delete-all")
-    public Map<String, String> deleteAllCustomers() {
-        Map<String, String> result = customerService.deleteAllCustomers();
-        return result;
+    public ResponseEntity<HttpStatus> deleteAllCustomers() {
+        customerService.deleteAllCustomers();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
