@@ -1,7 +1,7 @@
 package com.shopleft.ecommerce.service.impl;
 
 import java.time.LocalDateTime;
-import java.util.Map;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +23,28 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Map<String, String> deleteAllCustomers() {
+    public void deleteAllCustomers() {
         customerRepository.deleteAll();
-        return Map.of("Status","Success");
+    }
+
+    @Override
+    public Customer getCustomer(Long id) {
+        return customerRepository.getReferenceById(id);
+    }
+
+    @Override
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
+    }
+
+    @Override
+    public Customer updateCustomer(Long id, Customer customer) {
+        Customer c = customerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+        c.setFullName(customer.getFullName());
+        c.setEmail(customer.getEmail());
+        c.setCreatedAt(customer.getCreatedAt());
+        c.setPassword(customer.getPassword());
+        return customerRepository.save(c);
     }
 }

@@ -25,8 +25,8 @@ public class Customer {
     private LocalDateTime createdAt;
 
     //constructor
-    Customer() {}
-    Customer(String fullName, String email, String password, LocalDateTime createdAt) {
+    public Customer() {}
+    public Customer(String fullName, String email, String password, LocalDateTime createdAt) {
         this.fullName = fullName;
         this.email = email;
         this.password = password;
@@ -34,6 +34,9 @@ public class Customer {
     }
 
     // getters and setter
+    public Long getId() {return id;}
+    public void setId(Long id) {this.id = id;}
+
     public String getFullName() {return fullName;}
     public void setFullName(String fullName) {this.fullName=fullName;}
     
